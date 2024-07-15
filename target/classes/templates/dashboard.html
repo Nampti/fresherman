@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="/webjars/chartjs/3.7.1/Chart.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Dashboard</h1>
+
+    <h2>Freshers</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Programming Language</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="fresher : ${freshers}">
+            <td th:text="${fresher.id}"></td>
+            <td th:text="${fresher.name}"></td>
+            <td th:text="${fresher.email}"></td>
+            <td th:text="${fresher.programmingLanguage}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Centers</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="center : ${centers}">
+            <td th:text="${center.id}"></td>
+            <td th:text="${center.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Statistics</h2>
+    <canvas id="fresherChart"></canvas>
+    <script>
+        var ctx = document.getElementById('fresherChart').getContext('2d');
+        var fresherChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Center 1', 'Center 2', 'Center 3'], // Thay đổi theo dữ liệu thực tế
+                datasets: [{
+                    label: 'Number of Freshers',
+                    data: [12, 19, 3], // Thay đổi theo dữ liệu thực tế
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</div>
+<script src="/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
